@@ -15,10 +15,20 @@ $(document).ready(function() {
 
 
         success: function (response) {
-            console.log('response', response);
+            // console.log('response', response);
+            var source = $("#entry-template").html();
+            var template = Handlebars.compile(source);
+            var context = {
+                results: response.results
+            }
+            var html = template(context);
+
+            $('.row').html(html);
         },
-        error: function (response) {
-            console.log('uh oh, something went wrong');
+
+
+        error: function (xhr) {
+            console.log('uh oh, something went wrong', xhr.status);
         }
 
     })
